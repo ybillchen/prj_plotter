@@ -3,6 +3,9 @@
 Point::Point(double x, double y)
     : x(x), y(y) {}
 
+Stroke::Stroke(double x1, double y1, double x2, double y2)
+    : x1(x1), y1(y1), x2(x2), y2(y2) {}
+
 AABB::AABB(double x, double y, double width, double height)
     : x(x), y(y), width(width), height(height) {}
 
@@ -15,6 +18,9 @@ bool AABB::intersects(const AABB& other) const {
     return x < other.x + other.width && x + width > other.x &&
            y < other.y + other.height && y + height > other.y;
 }
+
+Patch::Patch(double x, double y, double width, double height, double value)
+    : x(x), y(y), width(width), height(height), value(value) {}
 
 Node::Node(double x, double y, double width, double height, 
     int capacity, int max_level, int level)
@@ -38,6 +44,13 @@ void Node::subdivide() {
         boundary.width/2, boundary.height/2, capacity, max_level, level+1);
     se = std::make_unique<Node>(x2, y2, 
         boundary.width/2, boundary.height/2, capacity, max_level, level+1);
+
+    nw->insert_many(points);
+    ne->insert_many(points);
+    sw->insert_many(points);
+    se->insert_many(points);
+
+    points.clear();
 }
 
 bool Node::insert(const Point& point) {
@@ -61,6 +74,16 @@ bool Node::insert(const Point& point) {
 
     return nw->insert(point) || ne->insert(point) || 
         sw->insert(point) || se->insert(point);
+}
+
+bool Node::insert_many(const std::vector<Point>& ps) {
+    bool success = true;
+
+    for (const auto& point : ps) {
+        success = insert(point) && success;
+    }
+
+    return success;
 }
 
 std::vector<Point> Node::query(const AABB& area) const {
@@ -93,6 +116,73 @@ std::vector<Point> Node::query(const AABB& area) const {
     return result;
 }
 
+std::vector<Stroke> Node::plot_grid() const {
+    Stroke* low = new Stroke(boundary.x, boundary.y, 
+        boundary.x+boundary.width, boundary.y);
+    Stroke* up = new Stroke(boundary.x, boundary.y+boundary.height, 
+        boundary.x+boundary.width, boundary.y+boundary.height);
+    Stroke* left = new Stroke(boundary.x, boundary.y, 
+        boundary.x, boundary.y+boundary.height);
+    Stroke* right = new Stroke(boundary.x+boundary.width, boundary.y, 
+        boundary.x+boundary.width, boundary.y+boundary.height);
+
+    std::vector<Stroke> strokes;
+    strokes.push_back(*low);
+    strokes.push_back(*up);
+    strokes.push_back(*left);
+    strokes.push_back(*right);
+
+    delete low, up, left, right;
+
+    _plot_grid(strokes);
+    return strokes;
+}
+
+void Node::_plot_grid(std::vector<Stroke>& strokes) const {
+
+    if (is_leaf()) {
+        return;
+    }
+
+    Stroke* h = new Stroke(boundary.x, boundary.y+boundary.height/2, 
+        boundary.x+boundary.width, boundary.y+boundary.height/2); // horizontal
+    Stroke* v = new Stroke(boundary.x+boundary.width/2, boundary.y, 
+        boundary.x+boundary.width/2, boundary.y+boundary.height); // vertical
+
+    strokes.push_back(*h);
+    strokes.push_back(*v);
+
+    delete h, v;
+
+    nw->_plot_grid(strokes);
+    ne->_plot_grid(strokes);
+    sw->_plot_grid(strokes);
+    se->_plot_grid(strokes);
+}
+
+std::vector<Patch> Node::plot_density() const {
+    std::vector<Patch> patches;
+    _plot_density(patches);
+    return patches;
+}
+
+void Node::_plot_density(std::vector<Patch>& patches) const {
+    
+    if (is_leaf()) {
+        double dens = points.size() / (boundary.width * boundary.height);
+        Patch* leaf_patch = new Patch(boundary.x, boundary.y, 
+            boundary.width, boundary.height, dens);
+        patches.push_back(*leaf_patch);
+        delete leaf_patch;
+        return;
+    }
+
+    nw->_plot_density(patches);
+    ne->_plot_density(patches);
+    sw->_plot_density(patches);
+    se->_plot_density(patches);
+}
+
 Quadtree::Quadtree(double x, double y, double width, double height, 
     int capacity, int max_level)
     : root(std::make_unique<Node>(x, y, width, height, 
@@ -109,33 +199,35 @@ bool Quadtree::insert(const double& x, const double& y) {
     return success;
 }
 
-bool Quadtree::insert_many(const std::vector<Point>& points) {
-    bool success = true;
-
-    for (const auto& point : points) {
-        success = success && root->insert(point);
-    }
-
-    return success;
+bool Quadtree::insert_many(const std::vector<Point>& ps) {
+    return root->insert_many(ps);
 }
 
 bool Quadtree::insert_many(
     const std::vector<double>& x, const std::vector<double>& y) {
     assert(x.size() == y.size());
 
-    bool success = true;
+    std::vector<Point> ps;
 
     for (std::size_t i = 0; i < x.size(); ++i) {
         Point* point = new Point(x[i], y[i]);
-        success = success && root->insert(*point);
+        ps.push_back(*point);
         delete point;
     }
 
-    return success;
+    return root->insert_many(ps);
 }
 
 std::vector<Point> Quadtree::query(
     double x, double y, double width, double height) const {
     AABB query_area(x, y, width, height);
     return root->query(query_area);
+}
+
+std::vector<Stroke> Quadtree::plot_grid() const {
+    return root->plot_grid();
+}
+
+std::vector<Patch> Quadtree::plot_density() const {
+    return root->plot_density();
 }
