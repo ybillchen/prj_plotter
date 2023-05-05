@@ -5,7 +5,7 @@ ext_modules = [
     Pybind11Extension(
         "prj_quadtree",
         ["prj_plotter/src/quadtree_pybind.cpp", "prj_plotter/src/quadtree.cpp"],
-        cxx_std=14,
+        cxx_std=11,
     ),
 ]
 

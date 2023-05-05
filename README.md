@@ -6,7 +6,7 @@
 
 Projection plotter for particle-based simulations using quadtree. The core implementation of quadtree is written in C++ for better computational performance.
 
-The code is open source under a [MIT License](LICENSE), which allows you to redistribute and modify the code with moderate limitations.
+The code is open source under an [MIT License](LICENSE), which allows you to redistribute and modify the code with moderate limitations.
 
 ## Intro
 
@@ -14,13 +14,14 @@ Coming soon.
 
 ## Install
 
-We have tested `prj_plotter` on `python >= 3.8`. However, lower versions may also work. The prerequisites of this package are
+We have tested `prj_plotter` on `python >= 3.6`. However, lower versions may also work. The prerequisites of this package are
 ```
 numpy
-pybind11
+matplotlib
+pybind11 >= 2.6.0
 ```
 
-Also, make sure some C++ compiler (e.g., GCC, Clang, Visual C++, etc.) is properly pre-installed. Your C++ compiler should be up-to-date with the C++14 standard.
+Also, make sure some C++ compiler (e.g., GCC, Clang, MSVC, etc.) is properly installed. Your compiler should be up-to-date with the C++14 standard.
 
 To download the package, `git clone` the source code from [GitHub](https://github.com/ybillchen/prj_plotter):
 ```shell
@@ -31,7 +32,7 @@ Next, `cd` the folder and use `pip` to install it:
 $ cd prj_plotter/
 $ pip install -e .
 ```
-The `-e` command allows you to make changes to the code.
+The `-e` command allows you to make changes to the Python code. You still need to re-install the package if you changed any of the C++ code.
 
 <!-- ## Usage
 
@@ -44,7 +45,7 @@ You may want to use your own paramters. Then simply replace `params_example` wit
 
 ## Contribute
 
-Feel free to dive in! [Raise an issue](https://github.com/ybillchen/GC_formation_model/issues/new) or submit pull requests.
+Feel free to dive in! [Raise an issue](https://github.com/ybillchen/prj_plotter/issues/new) or submit pull requests.
 
 <!-- ### Pull request protocol
 

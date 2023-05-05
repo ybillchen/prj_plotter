@@ -23,7 +23,8 @@ struct AABB {
 
 struct Patch {
     double x, y, width, height, value;
-    Patch(double x=0, double y=0, double width=0, double height=0, double value=0);
+    Patch(double x=0, double y=0, double width=0, double height=0, 
+        double value=0);
 };
 
 struct Node {
