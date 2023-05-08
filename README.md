@@ -21,7 +21,7 @@ matplotlib
 pybind11 >= 2.6.0
 ```
 
-Also, make sure some C++ compiler (e.g., GCC, Clang, MSVC, etc.) is properly installed. Your compiler should be up-to-date with the C++14 standard.
+Also, make sure some C++ compiler (e.g., GCC, Clang, MSVC, etc.) is properly installed. Your compiler should be up-to-date with the C++11 standard.
 
 To download the package, `git clone` the source code from [GitHub](https://github.com/ybillchen/prj_plotter):
 ```shell
