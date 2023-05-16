@@ -1,3 +1,9 @@
+"""
+BSD 3-Clause License
+Copyright (c) Bill Chen 2023
+All rights reserved.
+"""
+
 from setuptools import setup, find_packages
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 

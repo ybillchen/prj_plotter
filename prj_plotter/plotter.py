@@ -1,3 +1,9 @@
+"""
+BSD 3-Clause License
+Copyright (c) Bill Chen 2023
+All rights reserved.
+"""
+
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt

@@ -1,3 +1,9 @@
+/*
+BSD 3-Clause License
+Copyright (c) 2023 Bill Chen
+All rights reserved.
+*/
+
 #include <vector>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>

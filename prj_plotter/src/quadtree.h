@@ -1,3 +1,9 @@
+/*
+BSD 3-Clause License
+Copyright (c) 2023 Bill Chen
+All rights reserved.
+*/
+
 #pragma once
 
 #include <vector>
