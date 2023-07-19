@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/github/license/ybillchen/prj_plotter)](LICENSE)
 [![workflows](https://img.shields.io/github/actions/workflow/status/ybillchen/prj_plotter/build.yaml?logo=github)](https://github.com/ybillchen/prj_plotter/actions/workflows/build.yaml)
 
-Number density projection plotter using quadtree. The core implementation of quadtree is written in C++ for better computational performance. This tool is extremely useful for visualizing particle-based simulations.
+Number density projection plotter using quadtree. The core implementation of quadtree is written in C++ for better computational performance. There is also a python interface making the tool easy to use. This tool is extremely useful for visualizing particle-based simulations.
 
 The code is open source under an [MIT License](LICENSE), which allows you to redistribute and modify the code with almost no limitations.
 
