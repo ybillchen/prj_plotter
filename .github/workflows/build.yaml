@@ -19,7 +19,7 @@ jobs:
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
-          brew install pybind11
+          apt-get install python-pybind11
       - name: Build package
         run: |
           pip install -e .
