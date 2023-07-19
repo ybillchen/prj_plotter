@@ -69,11 +69,11 @@ The variables of the `prj_plotter.prj` function are
 
 This script gives you something like 
 
-![Demo figure](figs/prj_demo.png){width=40%}
+<img src="figs/prj_demo.png" alt="Demo prj" width="40%"/>
 
 For comparison, a histogram plot using `matplotlib.Axes.hist2d` leads to
 
-![Demo figure](figs/hist2d_demo.png){width=40%}
+<img src="figs/hist2d_demo.png" alt="Demo hist2d" width="40%"/>
 
 It is clear that the traditional histogram plot becomes quite chaotic near the edge where the number density is low and the Poisson's error dominates. The `prj_plotter.prj` function ensures that the number of points in each grid is approximately evenly distributed, so that the Poisson's error is under control.
 
