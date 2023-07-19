@@ -1,16 +1,12 @@
 # prj_plotter
 
-[![version](https://img.shields.io/badge/version-0.1-blue.svg)](https://github.com/ybillchen/prj_plotter)
+[![version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/ybillchen/prj_plotter)
 [![license](https://img.shields.io/github/license/ybillchen/prj_plotter)](LICENSE)
 <!-- [![workflows](https://img.shields.io/github/actions/workflow/status/ybillchen/GC_formation_model/build.yaml?logo=github)](https://github.com/ybillchen/GC_formation_model/actions/workflows/build.yaml) -->
 
-Projection plotter for particle-based simulations using quadtree. The core implementation of quadtree is written in C++ for better computational performance.
+Number density projection plotter using quadtree. The core implementation of quadtree is written in C++ for better computational performance. This tool is extremely useful for visualizing particle-based simulations.
 
-The code is open source under an [MIT License](LICENSE), which allows you to redistribute and modify the code with moderate limitations.
-
-## Intro
-
-Coming soon.
+The code is open source under an [MIT License](LICENSE), which allows you to redistribute and modify the code with almost no limitations.
 
 ## Install
 
@@ -34,37 +30,58 @@ $ pip install -e .
 ```
 The `-e` command allows you to make changes to the Python code. You still need to re-install the package if you changed any of the C++ code.
 
-<!-- ## Usage
+## Usage
 
-To start with, let's run the model with default parameters
+`prj_plotter` is easy to use. You need to first create a `matplotlib.axes.Axes` object, and next pass the `Axes` object and your data to the `prj_plotter.prj` function. Below is an example:
 ```python
->>> import prj_plotter as pp
+import numpy as np 
+import matplotlib.pyplot as plt
+
+import prj_plotter as pp
+
+# Create an Axes object
+fig, ax = plt.subplots()
+
+# Example: x and y are from Gaussian distribution
+rng = np.random.default_rng(42)
+N = 10000
+x = rng.normal(0.5, 0.2, N)
+y = rng.normal(0.5, 0.2, N)
+
+# make the projection plot
+pp.prj(ax, x, y, box=[0.,0.,1.,1.], vmin=3, vmax=5, log=True, 
+	capacity=64, max_level=10, cmap=plt.cm.magma)
+
+ax.axes.get_xaxis().set_visible(False)
+ax.axes.get_yaxis().set_visible(False)
+ax.set_aspect("equal")
+plt.show()
 ```
-You may want to use your own paramters. Then simply replace `params_example` with the name of your paramter file. -->
+The variables of the `prj_plotter.prj` function are
+
+* `x` and `y`: coordinates of points.
+* `box`: the boundaries of the plotting box in `[left, lower, width, height]`.
+* `vmin` and `vmax`: min and max values of the number density, in base-10 logarithmic scale if `log==True`.
+* `log`: whether to plot in logarithmic or not. Default to `True`.
+* `capacity`: max number of points in a grid. The grid subdivides if exceeding `capacity`. Default to `64`.
+* `max_level`: max number of subdivision levels. Default to `10`.
+* `cmap`: matplotlib colormap. Default to `matplotlib.pyplot.cm.magma`.
+
+This script gives you something like 
+
+![Demo figure](figs/prj_demo.png){width=40%}
+
+For comparison, a histogram plot using `matplotlib.Axes.hist2d` leads to
+
+![Demo figure](figs/hist2d_demo.png){width=40%}
+
+It is clear that the traditional histogram plot becomes quite chaotic near the edge where the number density is low and the Poisson's error dominates. The `prj_plotter.prj` function ensures that the number of points in each grid is approximately evenly distributed, so that the Poisson's error is under control.
 
 
 ## Contribute
 
-Feel free to dive in! [Raise an issue](https://github.com/ybillchen/prj_plotter/issues/new) or submit pull requests.
-
-<!-- ### Pull request protocol
-
-We recommend you to contribute code to `prj_plotter` following [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow). To summarize, you submit a pull request via the following steps:
-
-1. Clone the repository.
-2. Create and checkout a new branch. For example, a new branch called `new_feature`.
-3. Make changes on `new_feature` and never touch the `main` branch again until you are ready to merge.
-4. When you feel ready, submit a pull request on GitHub.
-5. There may be conflicts. If so, you need to 
-	1. Checkout the `main` branch and pull from `origin`.
-	2. Rebase `new_feature` on `main` and address the conflicts (recommended).
-	3. Alternatively, you can compare `new_feature` with `main` and fix all conflicts.
-	4. Your pull request will update automatically.
-6. If your pull request is approved, we will squash and merge your commits. 
-7. We will delete `new_feature` on GitHub when it's merged. You can choose to delete it loacally as well. 
-
-**_NOTE:_** Any slight modification may entirely change the random number generation! To keep repeatability of the model, please construct a new random generator for the need of new random numbers -->
+Feel free to dive in! [Raise an issue](https://github.com/ybillchen/prj_plotter/issues/new) or submit pull requests. We recommend you to contribute code to `prj_plotter` following [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow). 
 
 ## Maintainers
 
-- [@Yingtian (Bill) Chen](https://github.com/ybillchen)
+- [@ybillchen (Bill Chen)](https://github.com/ybillchen)

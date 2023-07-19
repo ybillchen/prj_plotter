@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 
 from prj_quadtree import Quadtree
 
+__all__ = ["prj"]
+
 def prj(ax, x, y, box, vmin, vmax, log=True, capacity=64, max_level=10, cmap=plt.cm.magma):
 
     t = Quadtree(box[0],box[1],box[2],box[3],capacity,max_level)
