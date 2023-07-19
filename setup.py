@@ -35,7 +35,7 @@ setup(
     ext_modules=ext_modules,
     cmdclass={"build_ext": build_ext},
     packages=find_packages(where="prj_plotter"),
-    install_requires = ["numpy", "matplotlib"],
+    install_requires = ["numpy", "matplotlib", "pybind11>=2.6.0"],
     classifiers = [
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
