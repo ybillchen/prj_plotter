@@ -31,6 +31,6 @@ jobs:
           make -j 4
           cd ..
           python -c "from pybind11.setup_helpers import Pybind11Extension, build_ext"
-      - name: Build package
+      - name: Build package 
         run: |
           pip install -e .
