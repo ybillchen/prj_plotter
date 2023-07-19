@@ -10,7 +10,7 @@ The code is open source under an [MIT License](LICENSE), which allows you to red
 
 ## Install
 
-We have tested `prj_plotter` on `python >= 3.6`. However, lower versions may also work. The prerequisites of this package are
+We have tested `prj_plotter` on `python >= 3.8`. However, lower versions may also work. The prerequisites of this package are
 ```
 numpy
 matplotlib
