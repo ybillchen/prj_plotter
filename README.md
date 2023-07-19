@@ -17,7 +17,7 @@ matplotlib
 pybind11 >= 2.6.0
 ```
  
-Also, make sure some C++ compiler (e.g., GCC, Clang, MSVC, etc.) is properly installed. Your compiler should be up-to-date with the C++11 standard.
+Also, make sure a C++ compiler (e.g., GCC, Clang, MSVC, etc.) is properly installed. Your compiler should be up-to-date with the C++11 standard.
 
 To download the package, `git clone` the source code from [GitHub](https://github.com/ybillchen/prj_plotter):
 ```shell
@@ -68,12 +68,11 @@ The variables of the `prj_plotter.prj` function are
 * `cmap`: matplotlib colormap. Default to `matplotlib.pyplot.cm.magma`.
 
 This script gives you something like 
-
-<img src="figs/prj_demo.png" alt="Demo prj" width="40%"/>
+<p align="center"><img src="figs/prj_demo.png" alt="Demo prj" width="40%"/></p>
 
 For comparison, a histogram plot using `matplotlib.Axes.hist2d` leads to
 
-<img src="figs/hist2d_demo.png" alt="Demo hist2d" width="40%"/>
+<p align="center"><img src="figs/hist2d_demo.png" alt="Demo hist2d" width="40%"/></p>
 
 It is clear that the traditional histogram plot becomes quite chaotic near the edge where the number density is low and the Poisson's error dominates. The `prj_plotter.prj` function ensures that the number of points in each grid is approximately evenly distributed, so that the Poisson's error is under control.
 
