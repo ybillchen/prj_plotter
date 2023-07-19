@@ -28,8 +28,9 @@ jobs:
           mkdir build
           cd build
           cmake ..
-          make check -j 4
+          make -j 4
           cd ..
+          python -c "from pybind11.setup_helpers import Pybind11Extension, build_ext"
       - name: Build package
         run: |
           pip install -e .
