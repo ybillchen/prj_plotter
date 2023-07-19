@@ -12,16 +12,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Get conda
-        uses: conda-incubator/setup-miniconda@v2.2.0
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-          channels: conda-forge
       - name: Install requirements
         run: |
-          python3 -m pip install --upgrade pip
-          conda install -c conda-forge pybind11
+          python -m pip install --upgrade pip
+          python -m pip install --user pybind11
       - name: Build package 
         run: |
-          python3 -c "from pybind11.setup_helpers import Pybind11Extension, build_ext"
-          python3 -m pip install -e .
+          python -c "from pybind11.setup_helpers import Pybind11Extension, build_ext"
+          python -m pip install -e .
