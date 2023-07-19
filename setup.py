@@ -7,14 +7,6 @@ All rights reserved.
 from setuptools import Extension, setup, find_packages
 
 ext_modules = [
-    Pybind11Extension(
-        "prj_quadtree",
-        ["prj_plotter/src/quadtree_pybind.cpp", "prj_plotter/src/quadtree.cpp"],
-        cxx_std=11,
-    ),
-]
-
-ext_modules = [
     Extension(
         "prj_quadtree",
         sources=["prj_plotter/src/quadtree_pybind.cpp", 
