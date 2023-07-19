@@ -1,5 +1,5 @@
 """
-BSD 3-Clause License
+MIT License
 Copyright (c) Bill Chen 2023
 All rights reserved.
 """
@@ -15,11 +15,30 @@ ext_modules = [
     ),
 ]
 
+with open("README.md", "r") as f:
+    long_description = f.read()
+
+version = {}
+with open("prj_plotter/version.py") as fp:
+    exec(fp.read(), version)
+
 setup(
     name="prj_plotter",
-    version="0.1",
-    description="Quadtree implementation in C++ with Python bindings",
+    version = version["__version__"],
+    url = "https://github.com/ybillchen/prj_plotter",
+    license = "MIT",
+    author = "Bill Chen",
+    author_email = "ybchen@umich.edu",
+    description="Number density projection plotter using quadtree",
+    long_description = long_description,
+    long_description_content_type = "text/markdown",
     ext_modules=ext_modules,
     cmdclass={"build_ext": build_ext},
     packages=find_packages(where="prj_plotter"),
+    install_requires = ["numpy", "matplotlib"],
+    classifiers = [
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: OS Independent",
+    ],
 )

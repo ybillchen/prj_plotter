@@ -1,5 +1,5 @@
 /*
-BSD 3-Clause License
+MIT License
 Copyright (c) 2023 Bill Chen
 All rights reserved.
 */
