@@ -1,6 +1,6 @@
 # prj_plotter
 
-[![version](https://img.shields.io/badge/version-0.1.1-blue.svg)](https://github.com/ybillchen/prj_plotter)
+[![version](https://img.shields.io/badge/version-0.1.2-blue.svg)](https://github.com/ybillchen/prj_plotter)
 [![license](https://img.shields.io/github/license/ybillchen/prj_plotter)](LICENSE)
 [![workflows](https://img.shields.io/github/actions/workflow/status/ybillchen/prj_plotter/build.yaml?logo=github)](https://github.com/ybillchen/prj_plotter/actions/workflows/build.yaml)
 
@@ -10,7 +10,7 @@ The code is open source under an [MIT License](LICENSE), which allows you to red
 
 ## Install
 
-We have tested `prj_plotter` on `python >= 3.8`. However, lower versions may also work. The prerequisites of this package are
+We have tested `prj_plotter` on macOS with `python >= 3.8`. However, other platforms and lower versions may also work. The prerequisites of this package are
 ```
 numpy
 matplotlib
