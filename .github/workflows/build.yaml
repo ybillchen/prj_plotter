@@ -21,14 +21,13 @@ jobs:
           python -m pip install --upgrade pip
       - name: Install pybind11
         run: |
-          sudo apt install -y cmake python3-dev libeigen3-dev libboost-dev git
+          sudo apt install -y cmake python3-dev
           git clone https://github.com/pybind/pybind11.git
           cd pybind11
-          cmake -DDOWNLOAD_CATCH=1
           mkdir build
           cd build
           cmake ..
-          sudo make install
+          make check -j 4
           cd ..
       - name: Build package
         run: |
