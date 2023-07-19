@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+      - name: Set up g++
+        run: |
+          sudo apt-get install g++
       - name: Build package
         run: |
           pip install -e .
