@@ -19,6 +19,7 @@ jobs:
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
+          python -m pip install --upgrade pytest
       - name: Install pybind11
         run: |
           sudo apt install -y cmake python3-dev
@@ -27,7 +28,7 @@ jobs:
           mkdir build
           cd build
           cmake ..
-          make -j 4
+          make check -j 4
           cd ..
       - name: Build package
         run: |
