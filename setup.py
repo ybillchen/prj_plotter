@@ -4,7 +4,7 @@ Copyright (c) Bill Chen 2023
 All rights reserved.
 """
 
-from setuptools import Extension, setup, find_packages
+from setuptools import setup, find_packages
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 
 ext_modules = [
@@ -12,16 +12,6 @@ ext_modules = [
         "prj_quadtree",
         ["prj_plotter/src/quadtree_pybind.cpp", "prj_plotter/src/quadtree.cpp"],
         cxx_std=11,
-    ),
-]
-
-ext_modules = [
-    Extension(
-        "prj_quadtree",
-        sources=["prj_plotter/src/quadtree_pybind.cpp", 
-            "prj_plotter/src/quadtree.cpp"],
-        language="c++",
-        extra_compile_args=["-std=c++11"],
     ),
 ]
 
