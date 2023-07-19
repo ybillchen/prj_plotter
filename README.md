@@ -1,6 +1,6 @@
 # prj_plotter
 
-[![version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/ybillchen/prj_plotter)
+[![version](https://img.shields.io/badge/version-0.1.1-blue.svg)](https://github.com/ybillchen/prj_plotter)
 [![license](https://img.shields.io/github/license/ybillchen/prj_plotter)](LICENSE)
 <!-- [![workflows](https://img.shields.io/github/actions/workflow/status/ybillchen/GC_formation_model/build.yaml?logo=github)](https://github.com/ybillchen/GC_formation_model/actions/workflows/build.yaml) -->
 
