@@ -4,14 +4,23 @@ Copyright (c) Bill Chen 2023
 All rights reserved.
 """
 
-from setuptools import setup, find_packages
-from pybind11.setup_helpers import Pybind11Extension, build_ext
+from setuptools import Extension, setup, find_packages
 
 ext_modules = [
     Pybind11Extension(
         "prj_quadtree",
         ["prj_plotter/src/quadtree_pybind.cpp", "prj_plotter/src/quadtree.cpp"],
         cxx_std=11,
+    ),
+]
+
+ext_modules = [
+    Extension(
+        "prj_quadtree",
+        sources=["prj_plotter/src/quadtree_pybind.cpp", 
+            "prj_plotter/src/quadtree.cpp"],
+        language="c++",
+        extra_compile_args=["-std=c++11"],
     ),
 ]
 
@@ -33,7 +42,6 @@ setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     ext_modules=ext_modules,
-    cmdclass={"build_ext": build_ext},
     packages=find_packages(where="prj_plotter"),
     setup_requires = ["pybind11>=2.6.0"],
     install_requires = ["numpy", "matplotlib", "pybind11>=2.6.0"],
